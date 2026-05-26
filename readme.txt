@@ -57,3 +57,6 @@ Version 1.1.2 moves the injected import panel into the main page body and stores
 
 
 1.2.0-rbc-csv-importer: Adds CSV support using columns criterion, level, level_description, score and renames the course-page card to Import from Turnitin or CSV.
+
+
+2026051213: Simplified import page layout to use Moodle's native filepicker styling with a single 900px content wrapper.
