@@ -60,3 +60,7 @@ Version 1.1.2 moves the injected import panel into the main page body and stores
 
 
 2026051213: Simplified import page layout to use Moodle's native filepicker styling with a single 900px content wrapper.
+
+
+1.3.4
+- Successful imports are created as ready Moodle rubric definitions rather than draft definitions.

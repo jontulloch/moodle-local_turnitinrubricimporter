@@ -669,6 +669,19 @@ function local_turnitinrubricimporter_parse_uploaded_rubric(string $content, str
 }
 
 
+/**
+ * Return the Moodle grading definition status used for a ready form.
+ *
+ * @return int
+ */
+function local_turnitinrubricimporter_ready_status(): int {
+    if (class_exists('gradingform_controller') && defined('gradingform_controller::DEFINITION_STATUS_READY')) {
+        return gradingform_controller::DEFINITION_STATUS_READY;
+    }
+
+    return 20;
+}
+
 $mform = new rubric_import_form(null, [
     'areaid' => $areaid,
     'contextid' => $contextid,
@@ -730,7 +743,7 @@ if ($mform->is_cancelled()) {
             $definition->name = $rubricname;
             $definition->description = $rubricdescription;
             $definition->descriptionformat = FORMAT_PLAIN;
-            $definition->status = 0;
+            $definition->status = local_turnitinrubricimporter_ready_status();
             $definition->timecreated = time();
             $definition->timemodified = time();
             $definition->usercreated = $USER->id;

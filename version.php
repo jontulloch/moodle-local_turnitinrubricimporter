@@ -25,9 +25,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_turnitinrubricimporter'; // Full name of the plugin (used for diagnostics).
-$plugin->version   = 2026051214; // Plugin version (YYYYMMDDXX).
+$plugin->version   = 2026051215; // Plugin version (YYYYMMDDXX).
 $plugin->requires  = 2022111500; // Minimum required Moodle version (Moodle 4.1).
 $plugin->maturity = MATURITY_BETA; // Development maturity level.
-$plugin->release = '1.3.3'; // Human-readable release name.
+$plugin->release = '1.3.4'; // Human-readable release name.
 
 $plugin->dependencies = []; // No other plugin dependencies.
