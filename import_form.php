@@ -64,7 +64,7 @@ HTML;
             get_string('chooserubricfile', 'local_turnitinrubricimporter'),
             null,
             [
-                'accepted_types' => ['.rbc', '.csv'],
+                'accepted_types' => '*',
                 'maxbytes' => 0,
                 'subdirs' => 0,
             ]
