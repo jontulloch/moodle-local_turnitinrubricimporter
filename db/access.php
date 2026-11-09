@@ -12,25 +12,26 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Capabilities for the rubric import plugin.
+ * Import capability evaluated at the destination activity context.
  *
- * @package   local_turnitinrubricimporter
+ * @package local_turnitinrubricimporter
  * @copyright 2025 Richard Rangel
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright 2026 University of East London
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = [
     'local/turnitinrubricimporter:import' => [
-        'captype'      => 'write',
-        'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes'   => [
+        'riskbitmask' => RISK_DATALOSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
             'manager' => CAP_ALLOW,
-            // Uncomment if teachers should also be allowed.
             'editingteacher' => CAP_ALLOW,
         ],
     ],

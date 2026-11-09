@@ -1,0 +1,18 @@
+{
+  "Rubric": [
+    {
+      "id": "r1",
+      "name": "Synthetic gradingform",
+      "scoring_method": 5
+    }
+  ],
+  "RubricCriterion": [
+    {
+      "id": "c1",
+      "name": "Clarity",
+      "description": "Readable writing",
+      "value": 100,
+      "position": 1
+    }
+  ]
+}

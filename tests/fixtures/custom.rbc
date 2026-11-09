@@ -1,0 +1,48 @@
+{
+  "Rubric": [
+    {
+      "id": "r1",
+      "name": "Synthetic custom",
+      "scoring_method": 4
+    }
+  ],
+  "RubricCriterion": [
+    {
+      "id": "c1",
+      "name": "Clarity",
+      "description": "Readable writing",
+      "value": 100,
+      "position": 1
+    }
+  ],
+  "RubricScale": [
+    {
+      "id": "s1",
+      "name": "Excellent",
+      "value": 100,
+      "position": 1
+    },
+    {
+      "id": "s2",
+      "name": "Needs improvement",
+      "value": 0,
+      "position": 2
+    }
+  ],
+  "RubricCriterionScale": [
+    {
+      "id": "x1",
+      "criterion": "c1",
+      "scale_value": "s1",
+      "description": "Clear and concise",
+      "value": 10
+    },
+    {
+      "id": "x2",
+      "criterion": "c1",
+      "scale_value": "s2",
+      "description": "Unclear",
+      "value": 0
+    }
+  ]
+}

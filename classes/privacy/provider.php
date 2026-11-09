@@ -12,30 +12,29 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Privacy Subsystem implementation for local_turnitinrubricimporter.
- *
- * @package   local_turnitinrubricimporter
- * @category  privacy
- * @copyright 2025 Richard Rangel
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace local_turnitinrubricimporter\privacy;
 
-use core_privacy\local\metadata\null_provider;
-
 /**
- * Null provider since this plugin does not store personal user data.
+ * Explain that the importer has no plugin-owned personal data store.
+ *
+ * Core grading owns the rubric and its author metadata, core user/file APIs own
+ * draft uploads, and the configured Moodle logstore owns import events. Their
+ * providers service retention, export and deletion. Do not independently erase
+ * shared assessment records from a local plugin privacy request.
+ *
+ * @package local_turnitinrubricimporter
+ * @category privacy
+ * @copyright 2025 Richard Rangel
+ * @copyright 2026 University of East London
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements null_provider {
-
+class provider implements \core_privacy\local\metadata\null_provider {
     /**
-     * Returns a language string key explaining why this plugin stores no data.
+     * Return the reason that this plugin has no separate data to export or erase.
      *
-     * @return string
+     * @return string Language string identifier
      */
     public static function get_reason(): string {
         return 'privacy:metadata';
