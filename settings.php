@@ -12,14 +12,14 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Admin settings for validation rules.
+ * Read-only installation and usage information in the Local plugins menu.
  *
- * @package   local_turnitinrubricimporter
- * @copyright 2025 Richard Rangel
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package local_turnitinrubricimporter
+ * @copyright 2026 University of East London
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -29,40 +29,11 @@ if ($hassiteconfig) {
         'local_turnitinrubricimporter',
         get_string('pluginname', 'local_turnitinrubricimporter')
     );
-
-    // Enable maximum score validation.
-    $settings->add(new admin_setting_configcheckbox(
-        'local_turnitinrubricimporter/enablemaxlevelscore',
-        get_string('enablemaxlevelscore', 'local_turnitinrubricimporter'),
-        get_string('enablemaxlevelscore_desc', 'local_turnitinrubricimporter'),
-        0 // Disabled by default.
+    $settings->add(new admin_setting_heading(
+        'local_turnitinrubricimporter/usage',
+        get_string('usage', 'local_turnitinrubricimporter'),
+        html_writer::tag('p', get_string('instructions', 'local_turnitinrubricimporter')) .
+        html_writer::tag('p', get_string('admininstructions', 'local_turnitinrubricimporter'))
     ));
-
-    // Maximum score per level.
-    $settings->add(new admin_setting_configtext(
-        'local_turnitinrubricimporter/maxlevelscore',
-        get_string('maxlevelscore', 'local_turnitinrubricimporter'),
-        get_string('maxlevelscore_desc', 'local_turnitinrubricimporter'),
-        10,
-        PARAM_FLOAT
-    ));
-
-    // Enable minimum score validation.
-    $settings->add(new admin_setting_configcheckbox(
-        'local_turnitinrubricimporter/enableminlevelscore',
-        get_string('enableminlevelscore', 'local_turnitinrubricimporter'),
-        get_string('enableminlevelscore_desc', 'local_turnitinrubricimporter'),
-        0
-    ));
-
-    // Minimum score per level (fixed value: 0).
-    $settings->add(new admin_setting_configtext(
-        'local_turnitinrubricimporter/minlevelscore',
-        get_string('minlevelscore', 'local_turnitinrubricimporter'),
-        get_string('minlevelscore_desc', 'local_turnitinrubricimporter'),
-        0,
-        PARAM_FLOAT
-    ));
-
     $ADMIN->add('localplugins', $settings);
 }

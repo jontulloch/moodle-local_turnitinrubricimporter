@@ -12,22 +12,23 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Version definition file.
+ * Release metadata for the Moodle 5.2 candidate.
  *
- * @package   local_turnitinrubricimporter
+ * @package local_turnitinrubricimporter
  * @copyright 2025 Richard Rangel
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright 2026 University of East London
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_turnitinrubricimporter'; // Full name of the plugin (used for diagnostics).
-$plugin->version   = 2026051215; // Plugin version (YYYYMMDDXX).
-$plugin->requires  = 2022111500; // Minimum required Moodle version (Moodle 4.1).
-$plugin->maturity = MATURITY_BETA; // Development maturity level.
-$plugin->release = '1.3.4'; // Human-readable release name.
-
-$plugin->dependencies = []; // No other plugin dependencies.
+$plugin->component = 'local_turnitinrubricimporter';
+$plugin->version = 2026110903;
+$plugin->requires = 2026042000;
+$plugin->supported = [502, 502];
+$plugin->maturity = MATURITY_BETA;
+$plugin->release = '1.4.0-beta.4';
+$plugin->dependencies = ['mod_assign' => ANY_VERSION, 'gradingform_rubric' => ANY_VERSION];
