@@ -2,7 +2,7 @@
 
 Import exported Turnitin RBC rubrics or a four-column CSV into the advanced grading rubric of a Moodle Assignment. Conversion runs entirely inside Moodle: there is no Turnitin API connection, external service, API key or additional runtime library.
 
-**Candidate release:** 1.4.0-beta.3 (`2026110902`). Target: Moodle 5.2, PHP 8.3 or 8.4. Earlier Moodle versions and Moodle 5.3 are not claimed by this candidate. Keep this beta on staging until the release checks in [docs/TESTING.md](docs/TESTING.md) are complete.
+**Candidate release:** 1.4.0-beta.4 (`2026110903`). Target: Moodle 5.2, PHP 8.3 or 8.4. Earlier Moodle versions and Moodle 5.3 are not claimed by this candidate. Keep this beta on staging until the release checks in [docs/TESTING.md](docs/TESTING.md) are complete.
 
 ## Features
 
@@ -38,7 +38,7 @@ The old `initimport.php?cmid=...` bookmark still redirects to the upload page, a
 
 This plugin creates a **Moodle Assignment rubric**. It does not attach a rubric to a Turnitin V2 activity or LTI tool, send rubric content to Turnitin, or alter submissions, grades, feedback release, blind-marking identifiers, marker allocation or group membership.
 
-On the Advanced grading management page, the import action uses Moodle's own card renderer and import icon, inheriting the theme's card styling. A small Moodle AMD module moves it into the existing action row using structural selectors. If JavaScript is unavailable or the action row is missing, the same card remains visible in the main content below the other actions. No custom card CSS, English-text matching or extra runtime library is used. The rubric editing page retains its normal import link.
+On the Advanced grading management page, the import action uses Moodle's icon API and native grading-card markup, inheriting the theme's card styling. The import icon receives the same `iconsize-big` class as the built-in grading-action icons during server rendering. A small Moodle AMD module moves the card into the existing action row using structural selectors. If JavaScript is unavailable or the action row is missing, the same card remains visible in the main content below the other actions. No custom card CSS, English-text matching or extra runtime library is used. The rubric editing page retains its normal import link.
 
 ## Permissions
 

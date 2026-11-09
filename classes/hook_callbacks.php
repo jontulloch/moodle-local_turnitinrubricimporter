@@ -65,12 +65,14 @@ final class hook_callbacks {
         }
         $url = new \moodle_url('/local/turnitinrubricimporter/import.php', ['cmid' => $cm->id]);
         if ($path === $basepath . '/grade/grading/manage.php') {
-            $renderer = $PAGE->get_renderer('core_grading');
+            $renderer = $PAGE->get_renderer('core');
+            // Match core grading cards, explicitly sizing this non-b/ icon too.
+            $icon = $renderer->pix_icon('i/import', '', 'moodle', ['class' => 'iconsize-big']);
             $hook->add_html(\html_writer::div(
-                $renderer->management_action_icon(
+                \html_writer::link(
                     $url,
-                    get_string('importfromfile', 'local_turnitinrubricimporter'),
-                    'i/import'
+                    $icon . \html_writer::div(get_string('importfromfile', 'local_turnitinrubricimporter'), 'action-text'),
+                    ['class' => 'action btn btn-lg']
                 ),
                 'actions local-turnitinrubricimporter',
                 ['id' => 'local-turnitinrubricimporter-actions']

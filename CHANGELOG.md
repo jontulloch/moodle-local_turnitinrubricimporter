@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.0-beta.4 — 9 November 2026
+
+- Apply Moodle's native `iconsize-big` class to the import icon during server rendering, matching the size used by the other grading-action icons. This supports both font and image icons, including the JavaScript-free fallback, without custom sizing rules.
+
 ## 1.4.0-beta.3 — 9 November 2026
 
 - Restore the matching grading-action card using Moodle's own renderer and import icon.

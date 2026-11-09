@@ -3,5 +3,5 @@ Turnitin Rubric Importer — local_turnitinrubricimporter
 See README.md for installation, use, compatibility, privacy, conversion limits,
 permissions and upgrade instructions. This candidate targets Moodle 5.2.
 
-1.4.0-beta.3 (2026110902) remains a staging candidate pending the documented
+1.4.0-beta.4 (2026110903) remains a staging candidate pending the documented
 release checks. GNU GPL v3 or later; original attribution is preserved.

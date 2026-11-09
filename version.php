@@ -26,9 +26,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_turnitinrubricimporter';
-$plugin->version = 2026110902;
+$plugin->version = 2026110903;
 $plugin->requires = 2026042000;
 $plugin->supported = [502, 502];
 $plugin->maturity = MATURITY_BETA;
-$plugin->release = '1.4.0-beta.3';
+$plugin->release = '1.4.0-beta.4';
 $plugin->dependencies = ['mod_assign' => ANY_VERSION, 'gradingform_rubric' => ANY_VERSION];

@@ -12,8 +12,8 @@ The old Plugins Directory checklist is explicitly marked legacy by Moodle. Its l
 | Frankenstyle component | `local_turnitinrubricimporter` |
 | Plugin type | Local plugin |
 | Supported Moodle version | 5.2 only for this candidate; do not add other versions without test evidence |
-| Release | 1.4.0-beta.3 |
-| Version build | 2026110902 |
+| Release | 1.4.0-beta.4 |
+| Version build | 2026110903 |
 | Maturity | Beta |
 | Licence | GNU GPL v3 or later |
 | Source | https://github.com/jontulloch/moodle-local_turnitinrubricimporter |

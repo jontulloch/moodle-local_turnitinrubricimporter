@@ -33,7 +33,7 @@ Fixtures in `tests/fixtures` are synthetic. Parser tests cover all four RBC type
 | Privacy export/deletion | Test staff export, user draft cleanup, grading retention and log retention through the site's approved Privacy API workflow | Pending |
 | Failure/recovery | Invalid files leave no area/method/definition changes; restore an assessment backup on staging to rehearse rollback | Pending |
 
-No Behat browser run or WCAG 2.2 AA conformance assessment is claimed by the initial automated suite. The native form and hook tests do not replace these staging checks. Confirm the beta.3 import card matches the other management cards, joins their row with JavaScript, remains usable without JavaScript or a target row, wraps on small screens and preserves keyboard focus. The plugin does not grade submissions; there is no student-facing feedback renderer to certify.
+No Behat browser run or WCAG 2.2 AA conformance assessment is claimed by the initial automated suite. The native form and hook tests do not replace these staging checks. Confirm the beta.4 import card and its icon match the other management cards. Check that the card joins their row with JavaScript, remains usable without JavaScript or a target row, wraps on small screens and preserves keyboard focus. Check icon sizing with the theme's font icons and standard image fallback. The plugin does not grade submissions; there is no student-facing feedback renderer to certify.
 
 ## Deployment and rollback
 
