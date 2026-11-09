@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.0-beta.3 — 9 November 2026
+
+- Restore the matching grading-action card using Moodle's own renderer and import icon.
+- Place the card alongside the existing setup actions with one scoped AMD module using structural selectors. Keep a visible, usable card when JavaScript or the target action row is unavailable, and preserve an already focused link.
+- Retain the existing definition and capability safeguards. Add the standard Moodle JavaScript lint/build step to CI.
+
 ## 1.4.0-beta.2 — 9 November 2026
 
 - Move the import action to Moodle's `before_footer_html_generation` hook, so it is inserted inside the main content rather than at a theme's end-of-body layout position.

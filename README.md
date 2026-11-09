@@ -2,7 +2,7 @@
 
 Import exported Turnitin RBC rubrics or a four-column CSV into the advanced grading rubric of a Moodle Assignment. Conversion runs entirely inside Moodle: there is no Turnitin API connection, external service, API key or additional runtime library.
 
-**Candidate release:** 1.4.0-beta.2 (`2026110901`). Target: Moodle 5.2, PHP 8.3 or 8.4. Earlier Moodle versions and Moodle 5.3 are not claimed by this candidate. Keep this beta on staging until the release checks in [docs/TESTING.md](docs/TESTING.md) are complete.
+**Candidate release:** 1.4.0-beta.3 (`2026110902`). Target: Moodle 5.2, PHP 8.3 or 8.4. Earlier Moodle versions and Moodle 5.3 are not claimed by this candidate. Keep this beta on staging until the release checks in [docs/TESTING.md](docs/TESTING.md) are complete.
 
 ## Features
 
@@ -31,12 +31,14 @@ The old `initimport.php?cmid=...` bookmark still redirects to the upload page, a
 ## Use
 
 1. Open an ungraded Moodle Assignment with a positive numeric grade.
-2. Open **Advanced grading**. Follow **Import from Turnitin or CSV**, displayed inside the main grading content before its closing footer when no definition exists. Alternatively open `/local/turnitinrubricimporter/initimport.php?cmid=COURSEMODULEID`.
+2. Open **Advanced grading**. Follow **Import from Turnitin or CSV**, displayed as a matching action card alongside the other rubric setup actions when no definition exists. Alternatively open `/local/turnitinrubricimporter/initimport.php?cmid=COURSEMODULEID`.
 3. Choose the RBC, JSON or CSV file. The upload page includes a sample CSV download.
 4. If importing a qualitative rubric or grading form, read and accept the generated-score explanation.
 5. Import, then review the ready rubric in Moodle's grading management page before any marking begins.
 
 This plugin creates a **Moodle Assignment rubric**. It does not attach a rubric to a Turnitin V2 activity or LTI tool, send rubric content to Turnitin, or alter submissions, grades, feedback release, blind-marking identifiers, marker allocation or group membership.
+
+On the Advanced grading management page, the import action uses Moodle's own card renderer and import icon, inheriting the theme's card styling. A small Moodle AMD module moves it into the existing action row using structural selectors. If JavaScript is unavailable or the action row is missing, the same card remains visible in the main content below the other actions. No custom card CSS, English-text matching or extra runtime library is used. The rubric editing page retains its normal import link.
 
 ## Permissions
 
@@ -65,6 +67,6 @@ The Privacy API null-provider declaration explains this delegation. Core grading
 - [Repository](https://github.com/jontulloch/moodle-local_turnitinrubricimporter)
 - [Issues](https://github.com/jontulloch/moodle-local_turnitinrubricimporter/issues)
 
-GitHub Actions checks Moodle 5.2 with PHP 8.3 / 8.4 and MariaDB 10.11 / PostgreSQL 16. The workflow runs syntax, Moodle coding standards, PHPDoc, structure, PHPUnit and core privacy checks. The final audit distinguishes local results from observed CI and staging results. No production benchmark or accessibility conformance claim is made.
+GitHub Actions checks Moodle 5.2 with PHP 8.3 / 8.4 and MariaDB 10.11 / PostgreSQL 16. The workflow runs syntax, JavaScript lint/build, Moodle coding standards, PHPDoc, structure, PHPUnit and core privacy checks. The final audit distinguishes local results from observed CI and staging results. No production benchmark or accessibility conformance claim is made.
 
 Original source copyright: Richard Rangel, 2025. Hardening and maintenance changes: University of East London, 2026. Original notices are preserved. Licensed under GNU GPL v3 or later; see [LICENSE](LICENSE). This project is not affiliated with or endorsed by Turnitin.

@@ -12,7 +12,7 @@ php vendor/bin/phpunit --testsuite local_turnitinrubricimporter_testsuite --fail
 php vendor/bin/phpunit public/privacy/tests/privacy/provider_test.php --filter '(test_null_provider|test_all_providers_compliant).*local_turnitinrubricimporter'
 ```
 
-Use moodle-plugin-ci for `phplint`, `phpcs --max-warnings 0`, `phpdoc --max-warnings 0`, `validate` and `savepoints`. There is no custom schema or upgrade savepoint to execute. Do not interpret the savepoint check's no-files result as an executed migration test. The audit records the separate old-to-new install/upgrade experiment.
+Use moodle-plugin-ci for `grunt --max-lint-warnings 0`, `phplint`, `phpcs --max-warnings 0`, `phpdoc --max-warnings 0`, `validate` and `savepoints`. There is no custom schema or upgrade savepoint to execute. Do not interpret the savepoint check's no-files result as an executed migration test. The audit records the separate old-to-new install/upgrade experiment.
 
 Fixtures in `tests/fixtures` are synthetic. Parser tests cover all four RBC types, CSV quoting/BOM/multiline fields, duplicate text, explicit custom zero, hostile text, missing cells, invalid references, unknown methods, oversized/deep input, duplicate headers/levels and score precision. The output regression also renders a complete Boost page through the registered hook, asserts that the link is inside the main content and verifies the Local plugins administration entry. Integration tests cover authorised import, both capabilities, student and cross-course denial, target mismatch, session keys, conversion acknowledgement, repeat imports, private upload ownership, unrelated-page database cost, existing guides/grades and mid-write rollback.
 
@@ -33,7 +33,7 @@ Fixtures in `tests/fixtures` are synthetic. Parser tests cover all four RBC type
 | Privacy export/deletion | Test staff export, user draft cleanup, grading retention and log retention through the site's approved Privacy API workflow | Pending |
 | Failure/recovery | Invalid files leave no area/method/definition changes; restore an assessment backup on staging to rehearse rollback | Pending |
 
-No Behat browser run or WCAG 2.2 AA conformance assessment is claimed by the initial automated suite. The native form and hook tests do not replace these staging checks. The plugin does not grade submissions; there is no student-facing feedback renderer to certify.
+No Behat browser run or WCAG 2.2 AA conformance assessment is claimed by the initial automated suite. The native form and hook tests do not replace these staging checks. Confirm the beta.3 import card matches the other management cards, joins their row with JavaScript, remains usable without JavaScript or a target row, wraps on small screens and preserves keyboard focus. The plugin does not grade submissions; there is no student-facing feedback renderer to certify.
 
 ## Deployment and rollback
 

@@ -69,6 +69,9 @@ jobs:
       - name: PHP syntax
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phplint
+      - name: JavaScript lint and build
+        if: ${{ !cancelled() }}
+        run: moodle-plugin-ci grunt --max-lint-warnings 0
       - name: Moodle coding standards
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phpcs --max-warnings 0

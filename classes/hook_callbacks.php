@@ -28,7 +28,7 @@ use local_turnitinrubricimporter\local\target;
  */
 final class hook_callbacks {
     /**
-     * Render without JavaScript, DOM matching, page-wide CSS or core overrides.
+     * Render native actions and place the management card with a scoped AMD module.
      *
      * @param before_footer_html_generation $hook Output hook
      */
@@ -64,6 +64,20 @@ final class hook_callbacks {
             return;
         }
         $url = new \moodle_url('/local/turnitinrubricimporter/import.php', ['cmid' => $cm->id]);
+        if ($path === $basepath . '/grade/grading/manage.php') {
+            $renderer = $PAGE->get_renderer('core_grading');
+            $hook->add_html(\html_writer::div(
+                $renderer->management_action_icon(
+                    $url,
+                    get_string('importfromfile', 'local_turnitinrubricimporter'),
+                    'i/import'
+                ),
+                'actions local-turnitinrubricimporter',
+                ['id' => 'local-turnitinrubricimporter-actions']
+            ));
+            $PAGE->requires->js_call_amd('local_turnitinrubricimporter/grading_actions', 'init');
+            return;
+        }
         $hook->add_html(\html_writer::div(
             \html_writer::link(
                 $url,
