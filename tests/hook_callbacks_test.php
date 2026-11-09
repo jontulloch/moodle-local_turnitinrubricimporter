@@ -77,19 +77,30 @@ final class hook_callbacks_test extends \advanced_testcase {
         $activity = $this->getDataGenerator()->create_module('assign', ['course' => $course->id]);
         $cm = get_coursemodule_from_id('assign', $activity->cmid, $course->id, false, MUST_EXIST);
         $PAGE->set_cm($cm, $course);
-        $PAGE->set_url('/grade/grading/manage.php', [
-            'contextid' => $PAGE->context->id,
-            'component' => 'mod_assign',
-            'area' => 'submissions',
-        ]);
+        $PAGE->set_url(
+            '/grade/grading/manage.php',
+            [
+                'contextid' => $PAGE->context->id,
+                'component' => 'mod_assign',
+                'area' => 'submissions',
+            ]
+        );
         $PAGE->set_pagelayout('incourse');
         $PAGE->force_theme('boost');
         $PAGE->set_title('Rubric import integration');
         $PAGE->set_heading($course->fullname);
         // No GET parameters: the action must use the context resolved by core.
         $_GET = [];
-        $output = new \core_renderer($PAGE, RENDERER_TARGET_GENERAL);
-        $html = $output->header() . $output->footer();
+        // PHPUnit runs in CLI; explicitly exercise the actual web theme renderer.
+        $output = new \theme_boost\output\core_renderer($PAGE, RENDERER_TARGET_GENERAL);
+        $bufferlevel = ob_get_level();
+        try {
+            $html = $output->header() . $output->footer();
+        } finally {
+            while (ob_get_level() > $bufferlevel) {
+                ob_end_clean();
+            }
+        }
         $document = new \DOMDocument();
         $previous = libxml_use_internal_errors(true);
         try {
@@ -103,5 +114,4 @@ final class hook_callbacks_test extends \advanced_testcase {
         $this->assertCount(1, $links);
         $this->assertStringContainsString('cmid=' . $activity->cmid, $links->item(0)->getAttribute('href'));
     }
-
 }
