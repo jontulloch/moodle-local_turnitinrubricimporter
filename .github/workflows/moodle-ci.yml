@@ -40,7 +40,7 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd=pg_isready --health-interval=10s
+          --health-cmd="pg_isready -U postgres" --health-interval=10s
           --health-timeout=5s --health-retries=5
     steps:
       - name: Check out plugin
@@ -67,18 +67,25 @@ jobs:
           DB: ${{ matrix.database }}
           MOODLE_BRANCH: MOODLE_502_STABLE
       - name: PHP syntax
+        if: ${{ !cancelled() }}
         run: moodle-plugin-ci phplint
       - name: Moodle coding standards
+        if: ${{ !cancelled() }}
         run: moodle-plugin-ci phpcs --max-warnings 0
       - name: PHPDoc
+        if: ${{ !cancelled() }}
         run: moodle-plugin-ci phpdoc --max-warnings 0
       - name: Plugin structure
+        if: ${{ !cancelled() }}
         run: moodle-plugin-ci validate
       - name: Upgrade savepoints
+        if: ${{ !cancelled() }}
         run: moodle-plugin-ci savepoints
       - name: PHPUnit regressions
+        if: ${{ !cancelled() }}
         run: moodle-plugin-ci phpunit --fail-on-warning
       - name: Core privacy checks for this plugin
+        if: ${{ !cancelled() }}
         working-directory: moodle
         run: >-
           php vendor/bin/phpunit public/privacy/tests/privacy/provider_test.php
