@@ -158,6 +158,7 @@ final class parser_test extends \basic_testcase {
             'overflow' => [$prefix . '1e309', 'x.csv', 'invalidscore'],
             'database overflow' => [$prefix . '100000', 'x.csv', 'invalidscore'],
             'excess decimals' => [$prefix . '0.000001', 'x.csv', 'invalidscore'],
+            'tiny excess decimals' => [$prefix . '0.0000000001', 'x.csv', 'invalidscore'],
             'nan' => [$prefix . 'NaN', 'x.csv', 'invalidscore'],
             'extra column' => [$prefix . '0,extra', 'x.csv', 'csvbadrow'],
             'one level' => ["criterion,level,level_description,score\nC,High,Good,10", 'x.csv', 'rubriclimits'],

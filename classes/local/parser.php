@@ -423,7 +423,7 @@ final class parser {
             self::fail('invalidscore');
         }
         $score = (float)$value;
-        if (!is_finite($score) || $score < 0 || $score > 99999.99999 || abs($score - round($score, 5)) > 0.000000001) {
+        if (!is_finite($score) || $score < 0 || $score > 99999.99999 || $score !== round($score, 5)) {
             self::fail('invalidscore');
         }
         return round($score, 5);

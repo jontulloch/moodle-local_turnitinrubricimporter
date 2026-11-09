@@ -270,6 +270,8 @@ final class importer_test extends \advanced_testcase {
      */
     public function test_mid_write_failure_rolls_back_everything(): void {
         global $DB;
+        // Observe the importer's real rollback rather than PHPUnit's enclosing transaction.
+        $this->preventResetByRollback();
         [$activity, $context] = $this->assignment();
         $realdb = $DB;
         $DB = new class ($realdb) {
@@ -319,5 +321,6 @@ final class importer_test extends \advanced_testcase {
         $this->assertFalse($DB->record_exists('grading_areas', ['contextid' => $context->id]));
         $this->assertEquals(0, $DB->count_records('gradingform_rubric_criteria'));
         $this->assertEquals(0, $DB->count_records('gradingform_rubric_levels'));
+        $this->assertTrue($DB->record_exists('assign', ['id' => $activity->id]));
     }
 }

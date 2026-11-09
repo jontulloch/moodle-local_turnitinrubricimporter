@@ -74,7 +74,7 @@ Remaining scaling limits: one rubric per request, bounded 2 MiB input, core writ
 | Moodle PHPDoc checker | Pass with maximum warnings set to zero |
 | Plugin structure validation | Pass; `db/install.xml` and `db/upgrade.php` correctly optional because no own schema/migration |
 | Upgrade savepoint validation | No relevant file; not represented as an executed migration |
-| Plugin PHPUnit suite | **57 tests, 98 assertions, pass** with fail-on-warning |
+| Plugin PHPUnit suite | **58 tests, 100 assertions, pass** with fail-on-warning |
 | Core Privacy API checks | **2 tests, 3 assertions, pass**. Five doc-comment metadata deprecations originate in Moodle core's own test class, not the plugin |
 | Private upload handling / source deletion | Form ownership/size tests and actual HTTP successful-source deletion pass |
 | Actual HTTP flow | **9 checks pass**: unauthenticated login redirect; read-only legacy GET; authorised sample download; foreign-area rejection; unrelated-course rejection; invalid session key without writes; valid POST plus source deletion; repeat-definition refusal; student denial |
@@ -87,7 +87,7 @@ Remaining scaling limits: one rubric per request, bounded 2 MiB input, core writ
 | PHP 8.4 / PostgreSQL 16 | CI matrix configured; consult the observed PR checks rather than inferring success from configuration |
 | Marketplace review | Draft prepared; no submission or approval performed |
 
-The initial two plugin-test failures were fixture-triggered Moodle theme initialisation during welcome-message delivery, corrected by redirecting test messages. All final plugin tests pass without notices/warnings. The temporary benchmark harness was also corrected to reset the page between simulated requests and use the baseline's fixed label; the final measurements run passes without notices. No production code was altered to silence those fixture errors.
+The initial two plugin-test failures were fixture-triggered Moodle theme initialisation during welcome-message delivery, corrected by redirecting test messages. The PostgreSQL matrix also identified that the rollback regression must disable PHPUnit's enclosing transaction to observe the importer's own rollback immediately; the corrected test additionally verifies the pre-existing assignment survives. All final plugin tests pass without notices/warnings. The temporary benchmark harness was also corrected to reset the page between simulated requests and use the baseline's fixed label; the final measurements run passes without notices. No production code was altered to silence those fixture errors.
 
 ## Publication readiness
 
