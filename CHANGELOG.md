@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.0-beta.2 — 9 November 2026
+
+- Move the import action to Moodle's `before_footer_html_generation` hook, so it is inserted inside the main content rather than at a theme's end-of-body layout position.
+- Use the module context already resolved by Moodle instead of depending on incoming grading-page query parameters.
+- Restore a read-only information page under Local plugins for administrator discovery and usage instructions.
+- Add regression checks for the registered hook through complete Boost page rendering and the administrator menu entry. Actual RemUI confirmation remains a staging check.
+
 ## 1.4.0-beta.1 — 9 November 2026
 
 - Bind grading area, context, component and module IDs to one authorised Moodle Assignment. Enforce the plugin import capability together with the core grading-management capability.

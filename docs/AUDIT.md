@@ -106,3 +106,9 @@ The repository was already public, and main was observed without protection at t
 - Legacy checklist and its notice pointing to current Marketplace guidance: https://moodledev.io/general/community/plugincontribution/checklist
 
 The linked current Marketplace guidelines could not be read beyond the Confluence shell. Verify the actual current form/guidelines before submission; the legacy checklist was not treated as current approval criteria.
+
+## Beta.2 integration correction — 9 November 2026
+
+Demo-site screenshots showed the installed plugin absent from the Local plugins settings list and its import action missing from the grading content. The missing menu entry was explained by removal of the unused settings file. Code review confirmed that the beta.1 action depended on `after_standard_main_region_html_generation`, which Boost places outside the main content and which custom theme layouts may omit. The exact rendering path in the proprietary demo theme has not been inspected.
+
+Beta.2 (`2026110901`) moves the action to `before_footer_html_generation`, which the core renderer dispatches when closing the page, and uses the module context already resolved by core. A read-only settings information page restores discoverability. No import permissions, source parsing or grading writes are changed by this correction. New regressions test the actual registered hook through full Boost page rendering (including its location inside the main region) and the administration tree, covering a gap in the earlier direct-hook tests. See the beta.2 PR checks for observed results; actual RemUI confirmation remains pending.

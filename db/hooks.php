@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $callbacks = [
     [
-        'hook' => \core\hook\output\after_standard_main_region_html_generation::class,
+        'hook' => \core\hook\output\before_footer_html_generation::class,
         'callback' => [\local_turnitinrubricimporter\hook_callbacks::class, 'grading_import_link'],
     ],
 ];

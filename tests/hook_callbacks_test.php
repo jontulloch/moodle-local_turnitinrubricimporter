@@ -16,7 +16,7 @@
 
 namespace local_turnitinrubricimporter;
 
-use core\hook\output\after_standard_main_region_html_generation;
+use core\hook\output\before_footer_html_generation;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
@@ -37,7 +37,7 @@ final class hook_callbacks_test extends \advanced_testcase {
         $this->setAdminUser();
         $PAGE->set_context(\context_system::instance());
         $PAGE->set_url('/course/view.php', ['id' => 1]);
-        $hook = new after_standard_main_region_html_generation(new \core_renderer($PAGE, RENDERER_TARGET_GENERAL));
+        $hook = new before_footer_html_generation(new \core_renderer($PAGE, RENDERER_TARGET_GENERAL));
         $reads = $DB->perf_get_reads();
         $writes = $DB->perf_get_writes();
         hook_callbacks::grading_import_link($hook);
@@ -60,9 +60,48 @@ final class hook_callbacks_test extends \advanced_testcase {
         $params = ['contextid' => $context->id, 'component' => 'mod_assign', 'area' => 'submissions'];
         $PAGE->set_url('/grade/grading/manage.php', $params);
         $_GET = $params;
-        $hook = new after_standard_main_region_html_generation(new \core_renderer($PAGE, RENDERER_TARGET_GENERAL));
+        $hook = new before_footer_html_generation(new \core_renderer($PAGE, RENDERER_TARGET_GENERAL));
         hook_callbacks::grading_import_link($hook);
         $this->assertStringContainsString('/local/turnitinrubricimporter/import.php', $hook->get_output());
         $this->assertStringNotContainsString('<script', $hook->get_output());
     }
+
+    /**
+     * Real page rendering must place the registered action inside the main content.
+     */
+    public function test_registered_hook_renders_link_inside_main_content(): void {
+        global $PAGE;
+        $this->resetAfterTest();
+        $this->setAdminUser();
+        $course = $this->getDataGenerator()->create_course();
+        $activity = $this->getDataGenerator()->create_module('assign', ['course' => $course->id]);
+        $cm = get_coursemodule_from_id('assign', $activity->cmid, $course->id, false, MUST_EXIST);
+        $PAGE->set_cm($cm, $course);
+        $PAGE->set_url('/grade/grading/manage.php', [
+            'contextid' => $PAGE->context->id,
+            'component' => 'mod_assign',
+            'area' => 'submissions',
+        ]);
+        $PAGE->set_pagelayout('incourse');
+        $PAGE->force_theme('boost');
+        $PAGE->set_title('Rubric import integration');
+        $PAGE->set_heading($course->fullname);
+        // No GET parameters: the action must use the context resolved by core.
+        $_GET = [];
+        $output = new \core_renderer($PAGE, RENDERER_TARGET_GENERAL);
+        $html = $output->header() . $output->footer();
+        $document = new \DOMDocument();
+        $previous = libxml_use_internal_errors(true);
+        try {
+            $this->assertTrue($document->loadHTML($html));
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($previous);
+        }
+        $xpath = new \DOMXPath($document);
+        $links = $xpath->query('//*[@role="main"]//a[contains(@href, "/local/turnitinrubricimporter/import.php")]');
+        $this->assertCount(1, $links);
+        $this->assertStringContainsString('cmid=' . $activity->cmid, $links->item(0)->getAttribute('href'));
+    }
+
 }

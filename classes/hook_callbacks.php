@@ -16,7 +16,7 @@
 
 namespace local_turnitinrubricimporter;
 
-use core\hook\output\after_standard_main_region_html_generation;
+use core\hook\output\before_footer_html_generation;
 use local_turnitinrubricimporter\local\target;
 
 /**
@@ -30,9 +30,9 @@ final class hook_callbacks {
     /**
      * Render without JavaScript, DOM matching, page-wide CSS or core overrides.
      *
-     * @param after_standard_main_region_html_generation $hook Output hook
+     * @param before_footer_html_generation $hook Output hook
      */
-    public static function grading_import_link(after_standard_main_region_html_generation $hook): void {
+    public static function grading_import_link(before_footer_html_generation $hook): void {
         global $CFG, $DB, $PAGE;
 
         $path = $PAGE->url->get_path();
@@ -45,27 +45,14 @@ final class hook_callbacks {
         ) {
             return;
         }
-        $areaid = optional_param('areaid', 0, PARAM_INT);
-        $contextid = optional_param('contextid', 0, PARAM_INT);
-        $cmid = 0;
-        if (!$areaid && $contextid) {
-            if (
-                optional_param('component', '', PARAM_COMPONENT) !== 'mod_assign' ||
-                    optional_param('area', '', PARAM_AREA) !== 'submissions'
-            ) {
-                return;
-            }
-            $context = \context::instance_by_id($contextid, IGNORE_MISSING);
-            if (!$context || $context->contextlevel !== CONTEXT_MODULE) {
-                return;
-            }
-            $cmid = (int)$context->instanceid;
-        }
-        if (!$cmid && !$areaid) {
+        // Core has already resolved and authorised the grading page's context.
+        // Use it rather than depending on the shape of the incoming query string.
+        $context = $PAGE->context;
+        if ($context->contextlevel !== CONTEXT_MODULE) {
             return;
         }
         try {
-            [$context, , $cm, $area] = target::resolve($cmid, $areaid, $contextid);
+            [$context, , $cm, $area] = target::resolve((int)$context->instanceid);
         } catch (\moodle_exception $e) {
             return;
         }

@@ -2,7 +2,7 @@
 
 Import exported Turnitin RBC rubrics or a four-column CSV into the advanced grading rubric of a Moodle Assignment. Conversion runs entirely inside Moodle: there is no Turnitin API connection, external service, API key or additional runtime library.
 
-**Candidate release:** 1.4.0-beta.1 (`2026110900`). Target: Moodle 5.2, PHP 8.3 or 8.4. Earlier Moodle versions and Moodle 5.3 are not claimed by this candidate. Keep this beta on staging until the release checks in [docs/TESTING.md](docs/TESTING.md) are complete.
+**Candidate release:** 1.4.0-beta.2 (`2026110901`). Target: Moodle 5.2, PHP 8.3 or 8.4. Earlier Moodle versions and Moodle 5.3 are not claimed by this candidate. Keep this beta on staging until the release checks in [docs/TESTING.md](docs/TESTING.md) are complete.
 
 ## Features
 
@@ -22,14 +22,16 @@ Import exported Turnitin RBC rubrics or a four-column CSV into the advanced grad
 3. Run **Site administration → Notifications**, or `php admin/cli/upgrade.php --non-interactive` from the Moodle code root. Do not create another nested plugin directory.
 4. Purge caches after the upgrade if the new import link is not visible.
 
-The component remains `local_turnitinrubricimporter`, so this upgrades release 1.3.4 in place. There are no plugin tables or custom schema migrations. Moodle updates capability metadata and registers the output hook during the version upgrade. Existing rubrics are preserved. Remove files deleted by this release when deploying by file copy, especially the old `lib.php` and `settings.php`; replacing the directory with the complete new package is preferable to overlaying files. Legacy unused validation configuration values can remain in `config_plugins` and have no effect.
+The component remains `local_turnitinrubricimporter`, so this upgrades release 1.3.4 in place. There are no plugin tables or custom schema migrations. Moodle updates capability metadata and registers the output hook during the version upgrade. Existing rubrics are preserved. Remove files deleted by this release when deploying by file copy, especially the old `lib.php`; replacing the directory with the complete new package is preferable to overlaying files. Legacy unused validation configuration values can remain in `config_plugins` and have no effect.
+
+A read-only information page is available under **Site administration → Plugins → Local plugins → Turnitin Rubric Importer**. This provides usage instructions; imports are opened within the chosen Assignment.
 
 The old `initimport.php?cmid=...` bookmark still redirects to the upload page, and is now read-only. Existing valid `areaid` / `contextid` import links are validated against the actual assignment. Caller-supplied return URLs are ignored; navigation returns to that assignment's grading management page.
 
 ## Use
 
 1. Open an ungraded Moodle Assignment with a positive numeric grade.
-2. Open **Advanced grading**. Follow **Import from Turnitin or CSV**, displayed below the main grading content when no definition exists. Alternatively open `/local/turnitinrubricimporter/initimport.php?cmid=COURSEMODULEID`.
+2. Open **Advanced grading**. Follow **Import from Turnitin or CSV**, displayed inside the main grading content before its closing footer when no definition exists. Alternatively open `/local/turnitinrubricimporter/initimport.php?cmid=COURSEMODULEID`.
 3. Choose the RBC, JSON or CSV file. The upload page includes a sample CSV download.
 4. If importing a qualitative rubric or grading form, read and accept the generated-score explanation.
 5. Import, then review the ready rubric in Moodle's grading management page before any marking begins.

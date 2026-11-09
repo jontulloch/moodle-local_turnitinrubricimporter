@@ -25,6 +25,7 @@
 
 $string['acknowledgescoring'] = 'I accept generated scoring if this file is qualitative or a grading form.';
 $string['acknowledgescoringrequired'] = 'Confirm that you accept the generated scoring described above before importing this file.';
+$string['admininstructions'] = 'Open a Moodle Assignment, choose Advanced grading and then Import from Turnitin or CSV. As a direct route, open /local/turnitinrubricimporter/initimport.php?cmid=MODULE_ID on this site, replacing MODULE_ID with the id from the assignment URL. There are no site-wide import options.';
 $string['assignmentalreadygraded'] = 'This assignment already has recorded grades. Import into an ungraded assignment instead.';
 $string['chooserubricfile'] = 'Choose a Turnitin RBC, JSON or CSV file';
 $string['conversionnotice'] = 'Qualitative rubrics receive generated scores from highest to lowest, ending at zero. Turnitin grading forms become two-level Moodle rubrics (not met / met). These conversions change the scoring model. Review all imported criteria, scores and student visibility options before grading.';
@@ -74,3 +75,4 @@ $string['rubriclimits'] = 'A rubric must have 1–100 criteria, each with 2–20
 $string['submitfile'] = 'Import rubric';
 $string['turnitinrubricimporter:import'] = 'Import rubric files into Moodle Assignments';
 $string['unsupportedfile'] = 'Only .rbc, .json and .csv rubric files are supported.';
+$string['usage'] = 'Using the importer';
