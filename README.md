@@ -69,4 +69,8 @@ The Privacy API null-provider declaration explains this delegation. Core grading
 
 GitHub Actions checks Moodle 5.2 with PHP 8.3 / 8.4 and MariaDB 10.11 / PostgreSQL 16. The workflow runs syntax, JavaScript lint/build, Moodle coding standards, PHPDoc, structure, PHPUnit and core privacy checks. The final audit distinguishes local results from observed CI and staging results. No production benchmark or accessibility conformance claim is made.
 
-Original source copyright: Richard Rangel, 2025. Hardening and maintenance changes: University of East London, 2026. Original notices are preserved. Licensed under GNU GPL v3 or later; see [LICENSE](LICENSE). This project is not affiliated with or endorsed by Turnitin.
+## Attribution and provenance
+
+This plugin is derived from [Rubric Importer Core (`local_customgradingform_renderer`)](https://github.com/ingrichardrangel/moodle-local_customgradingform_renderer), originally developed by Richard Rangel, copyright 2025. Modifications and additional development by the University of East London, 2026. Distributed under the GNU GPL v3 or later; see [LICENSE](LICENSE). This derivative is maintained independently of the original project.
+
+Original copyright and licence notices are preserved. This project is not affiliated with or endorsed by Turnitin.
